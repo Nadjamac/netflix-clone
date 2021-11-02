@@ -47,4 +47,9 @@ export class UsersService {
     delete user.password;
     return user;
   }
+
+  async findMany(): Promise<User[]> {
+    const user = await this.db.user.findMany();
+    return user;
+  }
 }

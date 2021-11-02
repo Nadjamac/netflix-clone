@@ -31,4 +31,9 @@ export class UsersController {
   findOne(@Param('id') id: string): Promise<User> {
     return this.service.findOne(id);
   }
+
+  @Get('find-all')
+  findMany(): Promise<User[]> {
+    return this.service.findMany();
+  }
 }
