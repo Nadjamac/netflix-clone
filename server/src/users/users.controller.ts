@@ -33,7 +33,7 @@ export class UsersController {
   }
 
   @Get('find-all')
-  findMany(): Promise<User[]> {
+  findMany() {
     return this.service.findMany();
   }
 }

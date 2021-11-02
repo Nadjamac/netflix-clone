@@ -7,6 +7,8 @@ import { Prisma, User } from '@prisma/client';
 import { PrismaService } from 'src/prisma.service';
 import { UserRole } from './enum/role.enum';
 import * as bcrypt from 'bcrypt';
+import { identity } from 'node_modules/rxjs/dist/types';
+import { removeAllListeners } from 'process';
 
 @Injectable()
 export class UsersService {
@@ -48,8 +50,9 @@ export class UsersService {
     return user;
   }
 
-  async findMany(): Promise<User[]> {
+  async findMany() {
     const user = await this.db.user.findMany();
-    return user;
+    const newUser = user.map(({ password, ...resto }) => resto);
+    return newUser;
   }
 }

@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Post, Get, Param } from '@nestjs/common';
 import { Movie } from '@prisma/client';
 import { CreateMovieDto } from './dto/create-movie.dto';
 import { MoviesService } from './movies.service';
@@ -10,5 +10,15 @@ export class MoviesController {
   @Post('create')
   createMovie(@Body() data: CreateMovieDto): Promise<Movie> {
     return this.service.create(data);
+  }
+
+  @Get('find-all')
+  findMany(): Promise<Movie[]> {
+    return this.service.findMany();
+  }
+
+  @Get('find/:id')
+  findUnique(@Param('id') id: string): Promise<Movie> {
+    return this.service.findUnique(id);
   }
 }
